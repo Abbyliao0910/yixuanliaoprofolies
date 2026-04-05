@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>毛茸茸的小日子 — 廖儀瑄作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4EF;
+    --ink: #1A1814;
+    --red: #C94E2A;
+    --grey: #8A8580;
+    --border: #DDD8D0;
+    --mono: 'Space Mono', monospace;
+    --serif: 'Noto Serif TC', serif;
+    --sans: 'Noto Sans TC', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem; background: var(--cream); border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; text-decoration: none; color: var(--ink); }
+  .nav-back { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--grey); transition: color 0.2s; }
+  .nav-back:hover { color: var(--red); }
+
+  .case-hero {
+    padding: 9rem 4rem 5rem; max-width: 1300px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: end;
+  }
+  .case-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .case-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--red); }
+  .case-title { font-family: var(--serif); font-size: clamp(2.5rem, 4.5vw, 4.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .case-summary { font-size: 1rem; color: #5A5550; line-height: 1.85; max-width: 520px; }
+  .case-hero-meta { display: flex; flex-direction: column; gap: 2rem; }
+  .meta-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); margin-bottom: 0.4rem; }
+  .meta-value { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
+
+  .stats-bar { background: var(--ink); color: white; padding: 2.5rem 4rem; }
+  .stats-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat-item { padding: 0 2rem 0 0; border-right: 1px solid #2A2622; margin-right: 2rem; }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--mono); font-size: 2.4rem; font-weight: 700; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-num span { color: var(--red); }
+  .stat-lbl { font-size: 0.78rem; color: #7A7570; line-height: 1.4; }
+
+  .case-content { max-width: 900px; margin: 0 auto; padding: 6rem 4rem; }
+  .section-title { font-family: var(--serif); font-size: 1.8rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--ink); }
+  .body-text { font-size: 0.96rem; color: #4A4540; line-height: 1.95; margin-bottom: 1.5rem; }
+  .section-block { margin-bottom: 5rem; }
+
+  /* ANALYTICS SCREENSHOT */
+  .analytics-wrap {
+    margin: 2rem 0;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .analytics-wrap img {
+    width: 100%;
+    display: block;
+  }
+  .analytics-caption {
+    padding: 1rem 1.5rem;
+    background: white;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--grey);
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--border);
+  }
+
+  /* LOGO FEATURE */
+  .logo-feature {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: white;
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+  .logo-feature img {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .logo-feature-text {}
+  .logo-feature-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .logo-feature-desc { font-size: 0.84rem; color: var(--grey); line-height: 1.6; }
+
+  /* AI FLOW */
+  .ai-flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+  .ai-step {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .ai-step:last-child { border-right: none; }
+  .ai-step-num { font-family: var(--mono); font-size: 0.65rem; color: var(--red); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+  .ai-step-title { font-family: var(--serif); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .ai-step-desc { font-size: 0.78rem; color: var(--grey); line-height: 1.55; }
+  .ai-step-arrow {
+    position: absolute;
+    right: -0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--red);
+    z-index: 1;
+    background: var(--cream);
+    padding: 0.2rem;
+  }
+
+  .back-section { text-align: center; padding: 4rem; border-top: 1px solid var(--border); }
+  .back-link { display: inline-flex; align-items: center; gap: 0.8rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--grey); transition: color 0.2s; }
+  .back-link:hover { color: var(--red); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .case-hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; gap: 3rem; }
+    .stats-bar { padding: 2rem 1.5rem; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .stat-item { border-right: none; margin-right: 0; }
+    .case-content { padding: 4rem 1.5rem; }
+    .ai-flow { grid-template-columns: 1fr; }
+    .ai-step { border-right: none; border-bottom: 1px solid var(--border); }
+    .ai-step:last-child { border-bottom: none; }
+    .ai-step-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">廖儀瑄</a>
+  <a href="index.html#projects" class="nav-back">← 返回作品集</a>
+</nav>
+
+<div class="case-hero">
+  <div>
+    <div class="case-tag">寵物 · AI 製程 · 實驗性頻道</div>
+    <h1 class="case-title">毛茸茸的<br>小日子</h1>
+    <p class="case-summary">
+      導入「AI 生成影像 ＋ 真人配音」的全新製作模式，
+      用更低的成本驗證寵物內容市場。
+      7 支影片，平均每支 4 萬觀看，單支最高 15 萬，
+      4.9% CTR 遠超行業平均。
+    </p>
+  </div>
+  <div class="case-hero-meta">
+    <div>
+      <div class="meta-label">頻道類型</div>
+      <div class="meta-value">寵物知識 · AI 製程實驗</div>
+    </div>
+    <div>
+      <div class="meta-label">執行期間</div>
+      <div class="meta-value">2025 — 至今</div>
+    </div>
+    <div>
+      <div class="meta-label">核心創新</div>
+      <div class="meta-value">AI 影像 + 真人配音低成本模式</div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">4<span>萬</span></div>
+      <div class="stat-lbl">平均每支觀看次數</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">15<span>萬</span></div>
+      <div class="stat-lbl">單支最高觀看次數</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4.9<span>%</span></div>
+      <div class="stat-lbl">曝光點擊率 CTR</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">264<span>萬</span></div>
+      <div class="stat-lbl">代表影片曝光次數</div>
+    </div>
+  </div>
+</div>
+
+<div class="case-content">
+
+  <div class="section-block">
+    <h2 class="section-title">這個頻道在做什麼</h2>
+    <div class="logo-feature">
+      <img src="images/pets-logo.jpg" alt="毛茸茸的小日子">
+      <div class="logo-feature-text">
+        <div class="logo-feature-name">毛茸茸的小日子</div>
+        <div class="logo-feature-desc">
+          以貓咪、寵物生活為主題的知識型頻道。
+          核心差異在於製作模式——用 AI 生成的影像搭配真人配音，
+          大幅降低拍攝成本，同時維持高觀看黏著度。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2 class="section-title">AI 工作流製程</h2>
+    <p class="body-text">
+      傳統寵物頻道需要實際拍攝素材，成本高且製作周期長。
+      我導入了一套以 AI 為核心的製作流程，在不犧牲內容品質的前提下大幅提升產能：
+    </p>
+    <div class="ai-flow">
+      <div class="ai-step">
+        <div class="ai-step-num">01 — 企劃</div>
+        <div class="ai-step-title">選題 + 腳本</div>
+        <div class="ai-step-desc">鎖定寵物飼主的實際問題，撰寫腳本，設計影像分鏡指示。</div>
+        <div class="ai-step-arrow">→</div>
+      </div>
+      <div class="ai-step">
+        <div class="ai-step-num">02 — 製作</div>
+        <div class="ai-step-title">AI 影像生成</div>
+        <div class="ai-step-desc">以 AI 工具生成與腳本配合的視覺素材，取代傳統拍攝流程。</div>
+        <div class="ai-step-arrow">→</div>
+      </div>
+      <div class="ai-step">
+        <div class="ai-step-num">03 — 完成</div>
+        <div class="ai-step-title">真人配音 + 上架</div>
+        <div class="ai-step-desc">配合真人配音增加溫度感，完成後剪輯上架，追蹤初期數據。</div>
+      </div>
+    </div>
+    <p class="body-text">
+      這個模式的關鍵不只是省成本，而是讓頻道可以更快速地測試選題、
+      驗證什麼主題對寵物飼主有吸引力，再把資源投入效果最好的方向。
+    </p>
+  </div>
+
+  <div class="section-block">
+    <h2 class="section-title">成效驗證</h2>
+    <div class="analytics-wrap">
+      <img src="images/pets-analytics.png" alt="YouTube 後台數據截圖">
+      <div class="analytics-caption">
+        YouTube Studio 後台 — 「貓到底要多冷才會冷？」觀看 159,792 次，曝光 2,643,305 次，CTR 4.9%
+      </div>
+    </div>
+    <p class="body-text">
+      代表作「貓到底要多冷才會冷？要怎麼幫貓保暖？」累積 159,792 次觀看、
+      264 萬次曝光，CTR 達 4.9%——
+      這個數字說明 AI 生成的視覺素材不只能用，而且能有效抓住觀眾注意力。
+    </p>
+    <p class="body-text">
+      7 支影片、平均 4 萬觀看的成績，已足以驗證這個低成本模式的市場可行性，
+      接下來的方向是持續優化 AI 影像品質並擴大選題範圍。
+    </p>
+  </div>
+
+</div>
+
+<div class="back-section">
+  <a href="index.html#projects" class="back-link">← 返回所有作品</a>
+</div>
+
+</body>
+</html>

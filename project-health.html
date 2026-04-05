@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>挺健康 — 廖儀瑄作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4EF;
+    --ink: #1A1814;
+    --red: #C94E2A;
+    --grey: #8A8580;
+    --border: #DDD8D0;
+    --mono: 'Space Mono', monospace;
+    --serif: 'Noto Serif TC', serif;
+    --sans: 'Noto Sans TC', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem; background: var(--cream); border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; text-decoration: none; color: var(--ink); }
+  .nav-back { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--grey); transition: color 0.2s; }
+  .nav-back:hover { color: var(--red); }
+
+  .case-hero {
+    padding: 9rem 4rem 5rem; max-width: 1300px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: end;
+  }
+  .case-tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .case-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--red); }
+  .case-title { font-family: var(--serif); font-size: clamp(2.5rem, 4.5vw, 4.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .case-summary { font-size: 1rem; color: #5A5550; line-height: 1.85; max-width: 520px; }
+  .case-hero-meta { display: flex; flex-direction: column; gap: 2rem; }
+  .meta-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); margin-bottom: 0.4rem; }
+  .meta-value { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
+
+  .stats-bar { background: var(--ink); color: white; padding: 2.5rem 4rem; }
+  .stats-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat-item { padding: 0 2rem 0 0; border-right: 1px solid #2A2622; margin-right: 2rem; }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--mono); font-size: 2.4rem; font-weight: 700; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-num span { color: var(--red); }
+  .stat-lbl { font-size: 0.78rem; color: #7A7570; line-height: 1.4; }
+
+  .case-content { max-width: 900px; margin: 0 auto; padding: 6rem 4rem; }
+  .section-title { font-family: var(--serif); font-size: 1.8rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--ink); }
+  .body-text { font-size: 0.96rem; color: #4A4540; line-height: 1.95; margin-bottom: 1.5rem; }
+  .section-block { margin-bottom: 5rem; }
+
+  .role-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .role-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 1.5rem; border: 1px solid var(--border); background: white; }
+  .role-icon { font-size: 1.2rem; margin-top: 0.1rem; flex-shrink: 0; }
+  .role-name { font-family: var(--serif); font-size: 0.92rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .role-desc { font-size: 0.78rem; color: var(--grey); line-height: 1.5; }
+
+  .story-block { background: var(--ink); color: white; padding: 3rem; margin: 3rem 0; position: relative; }
+  .story-block::before { content: '"'; font-family: var(--serif); font-size: 8rem; color: var(--red); opacity: 0.3; position: absolute; top: -1rem; left: 2rem; line-height: 1; }
+  .story-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 1.5rem; }
+  .story-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
+  .story-text { font-size: 0.92rem; color: #AAA5A0; line-height: 1.9; }
+  .story-outcome { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #2A2622; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .outcome-num { font-family: var(--mono); font-size: 1.8rem; font-weight: 700; }
+  .outcome-num span { color: var(--red); }
+  .outcome-lbl { font-size: 0.72rem; color: #7A7570; margin-top: 0.3rem; }
+
+  .thumb-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0; }
+  .thumb-item img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  .thumb-caption { font-family: var(--mono); font-size: 0.62rem; color: var(--grey); margin-top: 0.5rem; letter-spacing: 0.05em; }
+
+  /* PROCESS FLOW */
+  .process-flow { display: flex; flex-direction: column; gap: 0; margin: 2rem 0; }
+  .process-step { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+  .process-step:last-child { border-bottom: none; }
+  .step-num { font-family: var(--mono); font-size: 0.7rem; color: var(--red); font-weight: 700; margin-top: 0.2rem; width: 2rem; flex-shrink: 0; }
+  .step-content {}
+  .step-title { font-family: var(--serif); font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .step-desc { font-size: 0.82rem; color: var(--grey); line-height: 1.6; }
+
+  .back-section { text-align: center; padding: 4rem; border-top: 1px solid var(--border); }
+  .back-link { display: inline-flex; align-items: center; gap: 0.8rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--grey); transition: color 0.2s; }
+  .back-link:hover { color: var(--red); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .case-hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; gap: 3rem; }
+    .stats-bar { padding: 2rem 1.5rem; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .stat-item { border-right: none; margin-right: 0; }
+    .case-content { padding: 4rem 1.5rem; }
+    .role-grid { grid-template-columns: 1fr; }
+    .story-outcome { grid-template-columns: 1fr; }
+    .thumb-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">廖儀瑄</a>
+  <a href="index.html#projects" class="nav-back">← 返回作品集</a>
+</nav>
+
+<div class="case-hero">
+  <div>
+    <div class="case-tag">健康 · 醫療 · 受眾策略</div>
+    <h1 class="case-title">挺健康</h1>
+    <p class="case-summary">
+      全程主導選題、寫稿、剪輯溝通、文案封面到數據優化。
+      透過精準的受眾擴圈策略，將訂閱數從 3.6 萬推升至 7 萬，
+      單日最高新增 1,605 位訂閱者。
+    </p>
+  </div>
+  <div class="case-hero-meta">
+    <div>
+      <div class="meta-label">頻道類型</div>
+      <div class="meta-value">健康醫療 · 中高齡受眾</div>
+    </div>
+    <div>
+      <div class="meta-label">執行期間</div>
+      <div class="meta-value">2025.03 — 至今</div>
+    </div>
+    <div>
+      <div class="meta-label">我的角色</div>
+      <div class="meta-value">全流程主導（選題至數據優化）</div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">68<span>%</span></div>
+      <div class="stat-lbl">訂閱成長幅度<br>3.6萬 → 7萬</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1,605</div>
+      <div class="stat-lbl">單日最高新增訂閱</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5,377</div>
+      <div class="stat-lbl">單片最高訂閱貢獻</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">31<span>萬</span></div>
+      <div class="stat-lbl">代表作觀看次數</div>
+    </div>
+  </div>
+</div>
+
+<div class="case-content">
+
+  <div class="section-block">
+    <h2 class="section-title">背景與挑戰</h2>
+    <p class="body-text">
+      挺健康是以醫師擔任主持人的健康醫療頻道，在接手時訂閱數約 3.6 萬。
+      頻道有專業背書，但選題偏向特定疾病，受眾圈較窄，成長出現停滯。
+    </p>
+    <p class="body-text">
+      挑戰有兩層：一是如何在維持專業可信度的前提下擴大觸及，
+      二是在這個過程中同時執行商業冠名案，確保 KPI 達成。
+    </p>
+  </div>
+
+  <div class="section-block">
+    <h2 class="section-title">我負責什麼</h2>
+    <p class="body-text">挺健康的工作模式與思想實驗室不同——這裡幾乎是一條龍：</p>
+    <div class="role-grid">
+      <div class="role-item">
+        <span class="role-icon">🔍</span>
+        <div>
+          <div class="role-name">選題規劃</div>
+          <div class="role-desc">從特定疾病延伸至中高齡生活痛點（老花、掉髮、衰老、減肥），主動識別受眾在意的話題。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">✍️</span>
+        <div>
+          <div class="role-name">腳本寫稿</div>
+          <div class="role-desc">整理醫學資訊並轉化為大眾易懂的腳本，配合主持人風格調整語氣與結構。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">✂️</span>
+        <div>
+          <div class="role-name">剪輯溝通統籌</div>
+          <div class="role-desc">與外部剪輯師協調，控管交件時程與成片品質，確保頻道視覺調性一致。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">🖼</span>
+        <div>
+          <div class="role-name">封面與文案</div>
+          <div class="role-desc">設計能提升點擊率的封面方向，撰寫上架文案與標題，持續測試關鍵字優化。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">📊</span>
+        <div>
+          <div class="role-name">數據追蹤優化</div>
+          <div class="role-desc">定期分析後台數據（曝光、CTR、訂閱貢獻），發現問題點後採取對應調整措施。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">🤝</span>
+        <div>
+          <div class="role-name">商業冠名執行</div>
+          <div class="role-desc">負責「山立樹」年度冠名案執行，掌控合約進度，各項 KPI 均提前達標。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2 class="section-title">策略：從疾病到生活痛點</h2>
+    <p class="body-text">
+      受眾擴圈的關鍵決策是把選題框架從「治療疾病」調整為「中高齡生活關心的事」。
+    </p>
+    <div class="process-flow">
+      <div class="process-step">
+        <div class="step-num">舊</div>
+        <div class="step-content">
+          <div class="step-title">特定疾病導向</div>
+          <div class="step-desc">主要圍繞癌症治療、特定藥物等，受眾多為患者本身或家屬，圈子較窄。</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">新</div>
+        <div class="step-content">
+          <div class="step-title">中高齡生活痛點導向</div>
+          <div class="step-desc">老花、掉髮、衰老抗老、肥胖問題——這些是「每個人都在意」的題目，觸及更廣、分享意願更高。</div>
+        </div>
+      </div>
+    </div>
+    <p class="body-text">
+      這個轉向讓頻道在保持醫學可信度的同時，把內容的入口從「我有病才看」
+      變成「我想好好活著所以看」，訂閱者的黏著度也因此提升。
+    </p>
+  </div>
+
+  <div class="section-block">
+    <h2 class="section-title">代表故事</h2>
+    <div class="story-block">
+      <div class="story-label">數據驅動的關鍵決策</div>
+      <div class="story-title">老花眼藥水 2.0：標題調整讓單日新增 1,605 訂閱</div>
+      <div class="story-text">
+        「老花眼藥水 2.0」上線後的前兩天數據慘淡——曝光量出去了，但點擊率沒有被帶動，
+        訂閱的新增幾乎是靜止的。
+        <br><br>
+        我進後台拆解數據：曝光次數正常，說明 YouTube 有在推，
+        問題出在縮圖點擊率（CTR）——觀眾看到了但沒點進去。
+        排除封面問題後，我把目標鎖定在標題關鍵字上，
+        調整了措辭讓它更直接對應目標受眾的搜尋意圖。
+        <br><br>
+        調整後數據立刻反應：點擊率上升，演算法開始放大推送，
+        最終這支影片在第四天單日貢獻 1,605 訂閱，
+        成為頻道有史以來訂閱貢獻最高的影片（5,377 訂閱），觀看達 31 萬次。
+      </div>
+      <div class="story-outcome">
+        <div>
+          <div class="outcome-num">5,377</div>
+          <div class="outcome-lbl">總訂閱貢獻（頻道歷史最高）</div>
+        </div>
+        <div>
+          <div class="outcome-num">1,605</div>
+          <div class="outcome-lbl">單日最高新增（上線第 4 天）</div>
+        </div>
+        <div>
+          <div class="outcome-num">31<span>萬</span></div>
+          <div class="outcome-lbl">累積觀看次數</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2 class="section-title">頻道影片</h2>
+    <div class="thumb-grid">
+      <div class="thumb-item">
+        <img src="images/health-presbyopia.jpg" alt="治療老花">
+        <div class="thumb-caption">治療老花，台灣快有了？— 系列主題</div>
+      </div>
+      <div class="thumb-item">
+        <img src="images/health-teeth.jpg" alt="牙齒再生">
+        <div class="thumb-caption">重大突破！牙齒可以再生 — 高 CTR 標題測試</div>
+      </div>
+      <div class="thumb-item">
+        <img src="images/health-diet.jpg" alt="瘦瘦針">
+        <div class="thumb-caption">瘦瘦針價格大崩盤 — 時事追蹤選題</div>
+      </div>
+      <div class="thumb-item">
+        <img src="images/health-adc.jpg" alt="ADC抗癌神藥">
+        <div class="thumb-caption">最強導彈，腫瘤完全消失？— 869 訂閱貢獻</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="back-section">
+  <a href="index.html#projects" class="back-link">← 返回所有作品</a>
+</div>
+
+</body>
+</html>

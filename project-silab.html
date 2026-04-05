@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思想實驗室 — 廖儀瑄作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4EF;
+    --ink: #1A1814;
+    --red: #C94E2A;
+    --grey: #8A8580;
+    --border: #DDD8D0;
+    --mono: 'Space Mono', monospace;
+    --serif: 'Noto Serif TC', serif;
+    --sans: 'Noto Sans TC', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; text-decoration: none; color: var(--ink); }
+  .nav-back { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--grey); display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
+  .nav-back:hover { color: var(--red); }
+
+  /* HERO */
+  .case-hero {
+    padding: 9rem 4rem 5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: end;
+  }
+  .case-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .case-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--red); }
+  .case-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .case-summary {
+    font-size: 1rem;
+    color: #5A5550;
+    line-height: 1.85;
+    max-width: 520px;
+  }
+  .case-hero-meta { display: flex; flex-direction: column; gap: 2rem; }
+  .meta-item {}
+  .meta-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); margin-bottom: 0.4rem; }
+  .meta-value { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--ink);
+    color: white;
+    padding: 2.5rem 4rem;
+  }
+  .stats-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat-item {
+    padding: 0 2rem 0 0;
+    border-right: 1px solid #2A2622;
+    margin-right: 2rem;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--mono); font-size: 2.4rem; font-weight: 700; color: white; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-num span { color: var(--red); }
+  .stat-lbl { font-size: 0.78rem; color: #7A7570; line-height: 1.4; }
+
+  /* CONTENT */
+  .case-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 6rem 4rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .body-text {
+    font-size: 0.96rem;
+    color: #4A4540;
+    line-height: 1.95;
+    margin-bottom: 1.5rem;
+  }
+  .section-block { margin-bottom: 5rem; }
+
+  /* ROLE TAGS */
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .role-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--border);
+    background: white;
+  }
+  .role-icon { font-size: 1.2rem; margin-top: 0.1rem; flex-shrink: 0; }
+  .role-name { font-family: var(--serif); font-size: 0.92rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .role-desc { font-size: 0.78rem; color: var(--grey); line-height: 1.5; }
+
+  /* STORY BLOCK */
+  .story-block {
+    background: var(--ink);
+    color: white;
+    padding: 3rem;
+    margin: 3rem 0;
+    position: relative;
+  }
+  .story-block::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 8rem;
+    color: var(--red);
+    opacity: 0.3;
+    position: absolute;
+    top: -1rem; left: 2rem;
+    line-height: 1;
+  }
+  .story-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 1.5rem; }
+  .story-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; }
+  .story-text { font-size: 0.92rem; color: #AAA5A0; line-height: 1.9; }
+  .story-outcome {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #2A2622;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .outcome-num { font-family: var(--mono); font-size: 1.8rem; font-weight: 700; color: white; }
+  .outcome-num span { color: var(--red); }
+  .outcome-lbl { font-size: 0.72rem; color: #7A7570; margin-top: 0.3rem; }
+
+  /* THUMBNAILS */
+  .thumb-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .thumb-item img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+  }
+  .thumb-caption {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--grey);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* BACK LINK */
+  .back-section { text-align: center; padding: 4rem; border-top: 1px solid var(--border); }
+  .back-link { display: inline-flex; align-items: center; gap: 0.8rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--grey); transition: color 0.2s; }
+  .back-link:hover { color: var(--red); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .case-hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; gap: 3rem; }
+    .stats-bar { padding: 2rem 1.5rem; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .stat-item { border-right: none; margin-right: 0; }
+    .case-content { padding: 4rem 1.5rem; }
+    .role-grid { grid-template-columns: 1fr; }
+    .story-outcome { grid-template-columns: 1fr; gap: 1rem; }
+    .thumb-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">廖儀瑄</a>
+  <a href="index.html#projects" class="nav-back">← 返回作品集</a>
+</nav>
+
+<!-- CASE HERO -->
+<div class="case-hero">
+  <div>
+    <div class="case-tag">知識 · 科技 · Podcast</div>
+    <h1 class="case-title">思想實驗室</h1>
+    <p class="case-summary">
+      接手一個只有 3,500 訂閱的知識型頻道，主導轉型為深度專家訪談節目。
+      一年後：訂閱成長 22 倍、Apple Podcast 科學類排名第二、
+      單集最高貢獻 24,361 訂閱。
+    </p>
+  </div>
+  <div class="case-hero-meta">
+    <div class="meta-item">
+      <div class="meta-label">頻道類型</div>
+      <div class="meta-value">科技趨勢 · 產業訪談 · Podcast</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">執行期間</div>
+      <div class="meta-value">2025.03 — 至今</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">我的角色</div>
+      <div class="meta-value">嘉賓邀約 · 選題策略 · 大綱 · 數據優化</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">87<span>K+</span></div>
+      <div class="stat-lbl">年度新增訂閱數</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">22<span>×</span></div>
+      <div class="stat-lbl">訂閱成長倍數</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">51<span>萬</span></div>
+      <div class="stat-lbl">簡立峰專訪累積觀看</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">#<span>2</span></div>
+      <div class="stat-lbl">Apple Podcast 科學類排名</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="case-content">
+
+  <!-- 背景 -->
+  <div class="section-block">
+    <h2 class="section-title">背景與挑戰</h2>
+    <p class="body-text">
+      思想實驗室原本是單人錄製的知識型節目，在接手前訂閱數僅 3,500。
+      頻道有主持人、有製作能量，但缺少一個清晰的策略方向讓它被更多人發現。
+    </p>
+    <p class="body-text">
+      核心挑戰在於：如何在「硬議題」（AI、半導體、產業趨勢）和「大眾能看懂」
+      之間找到平衡，並且選到對的嘉賓，讓每一集都有值得分享的獨特觀點。
+    </p>
+  </div>
+
+  <!-- 我負責什麼 -->
+  <div class="section-block">
+    <h2 class="section-title">我負責什麼</h2>
+    <div class="role-grid">
+      <div class="role-item">
+        <span class="role-icon">🎯</span>
+        <div>
+          <div class="role-name">選題策略（主導）</div>
+          <div class="role-desc">測試題目潛力，決定每集方向。分時事追蹤、書商軟性議題、跨界合作三條線同時推進。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">📩</span>
+        <div>
+          <div class="role-name">嘉賓邀約（主導）</div>
+          <div class="role-desc">自主開發名單，研究嘉賓背景後撰寫客製化邀約信，半小時內完成一封針對性提案。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">📋</span>
+        <div>
+          <div class="role-name">訪談大綱</div>
+          <div class="role-desc">根據嘉賓背景與選題方向出大綱，配合時事滾動調整，訪前確保方向對齊。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">📊</span>
+        <div>
+          <div class="role-name">數據分析與優化</div>
+          <div class="role-desc">追蹤每集後台數據（曝光、點閱率、訂閱貢獻），發現異常時調整標題或封面策略。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">✂️</span>
+        <div>
+          <div class="role-name">剪輯統籌溝通</div>
+          <div class="role-desc">控管外部剪輯師的產出節奏與內容方向，確保成片品質與頻道調性一致。</div>
+        </div>
+      </div>
+      <div class="role-item">
+        <span class="role-icon">🎙</span>
+        <div>
+          <div class="role-name">Podcast 雙軌製作</div>
+          <div class="role-desc">同步維護影片與 Podcast 雙軌流程，達到 Apple Podcast 科學類節目推薦第二名。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 代表故事 -->
+  <div class="section-block">
+    <h2 class="section-title">代表故事</h2>
+
+    <div class="story-block">
+      <div class="story-label">關鍵案例</div>
+      <div class="story-title">簡立峰專訪：一個月邀約、三次改稿、51 萬觀看</div>
+      <div class="story-text">
+        確定要邀請前 Google 台灣董事總經理簡立峰後，我花時間研究他的公開發言與研究方向，
+        寫了一封針對 AI 產業趨勢的客製化邀約信。光是聯繫確認檔期就花了將近一個月。
+        <br><br>
+        更大的挑戰在後面：訪談大綱從確認到錄製前改了三次，
+        因為 Google 在此期間推出重大更新，每一次時事變動都讓我們重新討論方向——
+        我們不想只做一集「說 AI」的節目，要做一集「這個時間點只有他說得出來」的節目。
+        <br><br>
+        上線後，這支影片成為頻道史上表現最好的單集：
+        單片貢獻 24,361 個訂閱，目前累積觀看達 51 萬，
+        而且至今仍在持續帶入新觀眾——典型的長尾內容。
+      </div>
+      <div class="story-outcome">
+        <div>
+          <div class="outcome-num">24,361</div>
+          <div class="outcome-lbl">單片訂閱貢獻（頻道歷史最高）</div>
+        </div>
+        <div>
+          <div class="outcome-num">51<span>萬</span></div>
+          <div class="outcome-lbl">累積觀看數（持續長尾成長）</div>
+        </div>
+        <div>
+          <div class="outcome-num">~1<span>個月</span></div>
+          <div class="outcome-lbl">邀約 → 確認檔期</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 代表影片縮圖 -->
+  <div class="section-block">
+    <h2 class="section-title">頻道影片</h2>
+    <div class="thumb-grid">
+      <div class="thumb-item">
+        <img src="images/silab-gdp.webp" alt="台灣GDP超日韓">
+        <div class="thumb-caption">台灣GDP超日韓 ft.王安亞 — 2,822 訂閱貢獻</div>
+      </div>
+      <div class="thumb-item">
+        <img src="images/silab-algo.webp" alt="演算法成癮">
+        <div class="thumb-caption">演算法成癮 ft.謝伯讓 — 3,602 訂閱貢獻</div>
+      </div>
+      <div class="thumb-item">
+        <img src="images/silab-vtuber.webp" alt="AI與Vtuber">
+        <div class="thumb-caption">AI這麼強 ft.春魚創意 — 跨界合作嘗試</div>
+      </div>
+      <div class="thumb-item">
+        <img src="images/silab-ai.webp" alt="找AI訴苦">
+        <div class="thumb-caption">找AI訴苦 ft.Daniel Andler — 國際嘉賓邀約</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 策略思維 -->
+  <div class="section-block">
+    <h2 class="section-title">策略思維</h2>
+    <p class="body-text">
+      我把選題分成三條線同時推進：
+      <strong>時事追蹤線</strong>（中美議題、AI、半導體、政策），
+      <strong>書商合作線</strong>（偏軟性，人生思考、AI 哲學），
+      <strong>跨界合作線</strong>（VTuber 等嘗試性題目）。
+      三條線互不影響，讓頻道在保持知識深度的同時也能觸達不同受眾圈。
+    </p>
+    <p class="body-text">
+      嘉賓篩選的核心邏輯是：TA 對這個人有沒有好奇心？
+      這個人能帶給觀眾什麼是別人說不出來的獨特視角？
+      確定之後才去做研究、寫邀約信——每一封都是針對那個人寫的，不是模板。
+    </p>
+  </div>
+
+</div>
+
+<div class="back-section">
+  <a href="index.html#projects" class="back-link">← 返回所有作品</a>
+</div>
+
+</body>
+</html>
